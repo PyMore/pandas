@@ -1,5 +1,7 @@
 import numpy as np
 import pandas as pd
+import matplotlib as mpl
+import matplotlib.pyplot as plt
 
 #Read csv
 
@@ -50,4 +52,18 @@ dtIssue3 = pd.DataFrame(issue3)
 dtIssue4 = pd.DataFrame(issue4)
 dtIssue5 = pd.DataFrame(issue5)
 
+print(issue3)
+
 print(dtIssue1[['net_approval']].values.sum())
+
+plt.plot([dtIssue1[['net_approval']]\
+         .values.sum(),
+          dtIssue2[['net_approval']]\
+         .values.sum(),
+          dtIssue3[['net_approval']]\
+         .values.sum(),
+          dtIssue2[['net_approval']] \
+         .values.sum()
+])
+plt.ylabel('net_approval')
+plt.show()
