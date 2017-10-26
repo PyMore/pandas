@@ -2,8 +2,11 @@ import numpy as np
 import pandas as pd
 import matplotlib as mpl
 import matplotlib.pyplot as plt
+from statistics import mean
 
-#Read csv
+##############
+# Read csv
+#############
 
 expected_files = [
     'src/tweets.csv',
@@ -38,9 +41,7 @@ us = pd.read_csv(expected_files[8])
 ##############
 
 dtTweets = pd.DataFrame(tweets)
-#print("\n"*4)
 dtnews = pd.DataFrame(news)
-#print("\n"*4)
 
 ##################
 # DataFrame issue
@@ -52,18 +53,56 @@ dtIssue3 = pd.DataFrame(issue3)
 dtIssue4 = pd.DataFrame(issue4)
 dtIssue5 = pd.DataFrame(issue5)
 
-print(issue3)
 
-print(dtIssue1[['net_approval']].values.sum())
+totalIssue1 = (dtIssue1[['Disapprove']].values.sum())-\
+              (dtIssue1[['Approve']].values.sum())
 
-plt.plot([dtIssue1[['net_approval']]\
-         .values.sum(),
-          dtIssue2[['net_approval']]\
-         .values.sum(),
-          dtIssue3[['net_approval']]\
-         .values.sum(),
-          dtIssue2[['net_approval']] \
-         .values.sum()
-])
-plt.ylabel('net_approval')
+totalIssue2 = (dtIssue2[['Disapprove']].values.sum())-\
+              (dtIssue2[['Approve']].values.sum())
+
+totalIssue3 = (dtIssue3[['Disapprove']].values.sum())-\
+              (dtIssue3[['Approve']].values.sum())
+
+totalIssue4 = (dtIssue4[['Disapprove']].values.sum())-\
+              (dtIssue4[['Approve']].values.sum())
+
+totalIssue5 = (dtIssue5[['Disapprove']].values.sum())-\
+              (dtIssue5[['Approve']].values.sum())
+
+####################
+# average Disapprove
+###################
+
+
+#####################
+# matplotlib issues
+#####################
+
+names = [
+    'issue1',
+    'issue2',
+    'issue3',
+    'issue4',
+    'issue5'
+]
+values = [
+    totalIssue1,
+    totalIssue2,
+    totalIssue3,
+    totalIssue4,
+    totalIssue5
+]
+
+plt.figure(1, figsize=(9, 3))
+
+plt.subplot(131)
+plt.bar(names, values)
+plt.grid(True)
+plt.subplot(132)
+plt.scatter(names, values)
+plt.subplot(133)
+plt.plot(names, values)
+plt.suptitle('Issues')
 plt.show()
+
+
