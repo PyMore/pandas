@@ -6,7 +6,7 @@ virtualenv (name)
 
 ```
 
-### Enable virtualEnv
+### Active virtualEnv
 ```shell
 source (name)/bin/activate
 
