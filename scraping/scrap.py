@@ -1,6 +1,6 @@
+import math
 import pandas as pd
 import requests
-import pymongo
 from bs4 import BeautifulSoup
 from tabulate import tabulate
 # package mongodb
@@ -25,10 +25,26 @@ class Scrap:
 
     def get_info(self, contrib):
         res = requests.get("https://es.wikipedia.org/wiki/"+contrib)
+        print(res)
         soup = BeautifulSoup(res.content, 'lxml')
         table = soup.find_all('table')[0]
-        df = pd.read_html(str(table))
-        print(tabulate(df[0], headers='keys', tablefmt='psql'))
+        dfHtml = pd.read_html(str(table))
+
+        # Table
+        print(tabulate(dfHtml[0], headers='keys', tablefmt='psql'))
+
+
+        for  element in dfHtml[0][0]:
+            if type(element) is float:
+                if math.isnan(element) is not True:
+                    print(element)
+            else:
+                print(element)
+
+        print('\n'*1)
+
+
+
 
 
 sp = Scrap()
